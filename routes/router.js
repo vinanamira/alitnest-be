@@ -6,7 +6,7 @@ import nutriwise from '../controllers/nutriwiseController.js';
 import survey from '../controllers/surveyController.js';
 import consultationController from '../controllers/consultationController.js';
 import workoutController from '../controllers/workoutController.js';
-import dailyGoalsController from '../controllers/dailyGoalsController.js';
+// import dailyGoalsController from '../controllers/dailyGoalsController.js';
 import leaderboardController from '../controllers/leaderboardController.js';
 
 const router = express.Router();
