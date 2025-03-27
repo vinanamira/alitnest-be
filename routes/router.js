@@ -23,7 +23,7 @@ router.put('/password/:id', userController.updatePassword);
 router.post('/nutriwise', upload.single('file'), nutriwise.analyzeFood);
 
 // ============== Daily Goals ===============
-router.post('/food', dailyGoalsController.createDailyGoals);
+// router.post('/food', dailyGoalsController.createDailyGoals);
 
 // ============== In App Survey ===============
 router.post('/survey', survey.createSurvey);
