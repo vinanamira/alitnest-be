@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20-bullseye
 
 WORKDIR /app
 
@@ -7,5 +7,6 @@ RUN npm install
 
 COPY . .
 
+CMD ["node", "src/app.js"]
+
 EXPOSE 3000
-CMD ["npm", "start"]
