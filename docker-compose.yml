@@ -1,36 +1,33 @@
 version: '3.8'
-
 services:
   alitnest-be:
-    build: 
+    container_name: alitnest-be
+    build:
       context: .
       dockerfile: Dockerfile
-    container_name: alitnest-be
-    restart: always
     ports:
-      - "3000:3000"
+      - '3000:3000'
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://mongodb:27017/alitnest
     depends_on:
       - mongodb
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/alitnest
     networks:
-      - alitnest-be-network
+      - alitnest-net
 
   mongodb:
-    image: mongo:latest
-    restart: always
+    image: mongo:6.0
     container_name: mongodb
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongodb_data:/data/db
     networks:
-      - alitnest-be-network
-    command: ["mongod", "--bind_ip_all", "--quiet"]
-
-networks:
-  alitnest-be-network:
-    driver: bridge
+      - alitnest-net
 
 volumes:
   mongodb_data:
+
+networks:
+  alitnest-net:
+    driver: bridge
