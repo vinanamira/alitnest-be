@@ -1,31 +1,31 @@
 version: '3.8'
 
 services:
-  backend:
+  alitnest-be:
     build: .
     container_name: alitnest-be
     ports:
       - "3000:3000"
     depends_on:
       - mongodb
-    env_file:
-      - .env
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/alitnest
     networks:
-      - alitnet
+      - alitnest-be-network
 
   mongodb:
-    image: mongo:6.0
+    image: mongo:latest
     container_name: mongodb
     ports:
       - "27017:27017"
     volumes:
-      - mongo_data:/data/db
+      - mongodb_data:/data/db
     networks:
-      - alitnet
+      - alitnest-be-network
 
 networks:
-  alitnet:
+  alitnest-be-network:
     driver: bridge
 
 volumes:
-  mongo_data:
+  mongodb_data:
