@@ -4,6 +4,7 @@ services:
   alitnest-be:
     build: .
     container_name: alitnest-be
+    restart: always
     ports:
       - "3000:3000"
     depends_on:
@@ -15,6 +16,7 @@ services:
 
   mongodb:
     image: mongo:latest
+    restart: always
     container_name: mongodb
     ports:
       - "27017:27017"
