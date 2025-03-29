@@ -2,29 +2,30 @@ version: '3.8'
 
 services:
   backend:
-    image: vinanamira/alitnest-be:latest
+    build: .
     container_name: alitnest-be
     ports:
       - "3000:3000"
     depends_on:
       - mongodb
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/alitnest
+    env_file:
+      - .env
     networks:
       - alitnet
 
   mongodb:
-    image: mongo:latest
+    image: mongo:6.0
     container_name: mongodb
     ports:
       - "27017:27017"
     volumes:
-      - mongo-data:/data/db
+      - mongo_data:/data/db
     networks:
       - alitnet
 
-volumes:
-  mongo-data:
-
 networks:
   alitnet:
+    driver: bridge
+
+volumes:
+  mongo_data:
