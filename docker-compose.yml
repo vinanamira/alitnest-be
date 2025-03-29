@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   alitnest-be:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     container_name: alitnest-be
     restart: always
     ports:
@@ -24,6 +26,7 @@ services:
       - mongodb_data:/data/db
     networks:
       - alitnest-be-network
+    command: ["mongod", "--bind_ip_all", "--quiet"]
 
 networks:
   alitnest-be-network:
