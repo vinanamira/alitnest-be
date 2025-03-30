@@ -1,30 +1,22 @@
 version: '3'
 services:
-  alitnest-be:
-    container_name: alitnest-be
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
-    env_file:
-    - .env 
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/alitnest
-    depends_on:
-      - mongodb
-    networks:
-      - alitnest-net
-
   mongodb:
     image: mongo:6.0
     container_name: mongodb
     ports:
-      - '27017:27017'
+      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
-    networks:
-      - alitnest-net
+
+  alitnest-be:
+    build: .
+    container_name: alitnest-be
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/alitnest
+    depends_on:
+      - mongodb
 
 volumes:
   mongodb_data:
