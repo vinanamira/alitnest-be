@@ -7,6 +7,8 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - alitnest-net
 
   alitnest-be:
     build: .
@@ -17,6 +19,8 @@ services:
       - MONGODB_URI=mongodb://mongodb:27017/alitnest
     depends_on:
       - mongodb
+    networks:
+      - alitnest-net
 
 volumes:
   mongodb_data:
