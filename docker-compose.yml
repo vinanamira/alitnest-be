@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   alitnest-be:
     container_name: alitnest-be
