@@ -2,9 +2,9 @@
     "configurations": [
         {
             "type": "chrome",
-            "name": "http://localhost:3000/user/register",
+            "name": "http://localhost:80/register",
             "request": "launch",
-            "url": "http://localhost:3000/user/register"
+            "url": "http://localhost:80/register"
         }
     ]
 }
