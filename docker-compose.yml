@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
     environment:
-      - MONGODB_URI=mongodb://mongodb:27017/alitnest?directConnection=true
+      - MONGODB_URI=mongodb://127.0.0.1:27017/alitnest?directConnection=true
     networks:
       - alitnest-net
 
