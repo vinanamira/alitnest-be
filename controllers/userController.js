@@ -79,41 +79,163 @@ export const getUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ 
+                status: "FAILED", 
+                message: "Pengguna tidak ditemukan" 
+            });
         }
-        res.json(user);
+        
+        res.status(200).json({
+            status: "SUCCESS",
+            data: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                createdAt: user.createdAt
+            }
+        });
     } catch (error) {
-        res.status(500).json({ message: "Error retrieving user", error: error.message });
+        res.status(500).json({ 
+            status: "FAILED", 
+            message: "Gagal mengambil data profil",
+            error: error.message 
+        });
     }
 };
 
 export const updateUserProfile = async (req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.json(user);
+        const { id } = req.params;
+        const { name, email, phone } = req.body;
+
+        if (!name || typeof name !== "string" || name.trim() === "") {
+            return res.status(400).json({ 
+                status: "FAILED", 
+                message: "Nama tidak boleh kosong!" 
+            });
+        }
+
+        if (!email || typeof email !== "string" || email.trim() === "") {
+            return res.status(400).json({ 
+                status: "FAILED", 
+                message: "Email tidak boleh kosong!" 
+            });
+        }
+
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+            return res.status(400).json({ 
+                status: "FAILED", 
+                message: "Email tidak valid!" 
+            });
+        }
+
+        const existingUser = await User.findOne({ email, _id: { $ne: id } });
+        if (existingUser) {
+            return res.status(409).json({ 
+                status: "FAILED", 
+                message: "Email sudah digunakan oleh pengguna lain!" 
+            });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            {
+                name: name.trim(),
+                email: email.trim(),
+                phone: phone || '',
+                updatedAt: Date.now()
+            },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ 
+                status: "FAILED", 
+                message: "Pengguna tidak ditemukan" 
+            });
+        }
+
+        res.status(200).json({
+            status: "SUCCESS",
+            message: "Profil berhasil diperbarui",
+            data: {
+                id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                phone: updatedUser.phone
+            }
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error updating profile", error: error.message });
+        res.status(500).json({ 
+            status: "FAILED", 
+            message: "Gagal memperbarui profil",
+            error: error.message 
+        });
     }
 };
 
 export const updatePassword = async (req, res) => {
     try {
-        const { newPassword } = req.body;
-        if (!newPassword || typeof newPassword !== "string" || newPassword.trim() === "") {
-            return res.status(400).json({ message: "Password baru tidak boleh kosong!" });
+        const { id } = req.params;
+        const { currentPassword, newPassword } = req.body;
+
+        if (!currentPassword || typeof currentPassword !== "string" || currentPassword.trim() === "") {
+            return res.status(400).json({ 
+                status: "FAILED", 
+                message: "Password saat ini wajib diisi!" 
+            });
         }
 
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
+        if (!newPassword || typeof newPassword !== "string" || newPassword.trim() === "") {
+            return res.status(400).json({ 
+                status: "FAILED", 
+                message: "Password baru wajib diisi!" 
+            });
         }
-        
-        user.password = await bcrypt.hash(newPassword, 10);
+
+        if (newPassword.length < 8) {
+            return res.status(400).json({ 
+                status: "FAILED", 
+                message: "Password baru minimal 8 karakter!" 
+            });
+        }
+
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ 
+                status: "FAILED", 
+                message: "Pengguna tidak ditemukan" 
+            });
+        }
+
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ 
+                status: "FAILED", 
+                message: "Password saat ini salah!" 
+            });
+        }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        user.password = hashedPassword;
+        user.updatedAt = Date.now();
         await user.save();
 
-        res.json({ message: "Password updated successfully" });
+        res.status(200).json({
+            status: "SUCCESS",
+            message: "Password berhasil diperbarui"
+        });
+
     } catch (error) {
-        res.status(500).json({ message: "Error updating password", error: error.message });
+        res.status(500).json({ 
+            status: "FAILED", 
+            message: "Gagal memperbarui password",
+            error: error.message 
+        });
     }
 };
 
