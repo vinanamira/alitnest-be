@@ -1,20 +1,19 @@
-<h1 align="center" style="font-weight: bold;">KawalTani</h1>
+<h1 align="center" style="font-weight: bold;">Alitnest</h1>
 
 <p align="center">
  <a href="#tech">Technologies</a> • 
  <a href="#started">Getting Started</a> • 
-  <a href="#routes">API Endpoints</a> •
- <a href="#colab">Collaborators</a> 
+  <a href="#routes">API Endpoints</a> 
 </p>
 
 <p align="center">
-    <b>Kawaltani is an IoT-based system developed to support the monitoring of agricultural land and plant growth. This system provides real-time information on location, plant conditions, and land conditions, as well as alerts and action recommendations when discrepancies arise. With features such as pattern visualization, data trends, and a chatbot, Kawaltani is designed to assist farmers in land management more efficiently and based on data. </b>
+    <b>Alitnest is an application that helps users manage a healthy lifestyle with personalized, measurable, and effective nutrition solutions. This application provides features such as Nutriwise for food scanning, Workout Schedule, Health Articles, and Consultations with nutritionists. </b>
 </p>
 
 <h2 id="technologies">Technology</h2>
 
-- Laravel
-- MySQL
+- Express.js
+- MongoDB
 - OpenAI
 
 <h2 id="started">Getting started</h2>
@@ -23,8 +22,7 @@
 
 Here you list all prerequisites necessary for running the project:
 
-- [Laravel](https://laravel.com/docs/11.x/)
-- [OpenAI](https://platform.openai.com/docs/overview)
+- [Express.js](https://expressjs.com/en/starter/hello-world.html)
 
 ## How to use
 
@@ -43,11 +41,18 @@ Here you list all prerequisites necessary for running the project:
     ```bash
    OPENAI_API_KEY=<your_api_key>
    ```
+3. **Set the database key:**
+
+   Set the environment variable in the project: Create a `.env` file at the root of the project and add the following line
+
+    ```bash
+   MONGODB_URI=<your_url_mongodb>
+   ```
 
 4. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/vinanamira/kawaltani-chatbot-be.git
+   git clone https://github.com/vinanamira/alitnest-be.git
    ```
    
 5. **Enter the Project Directory:**
@@ -55,7 +60,7 @@ Here you list all prerequisites necessary for running the project:
    After the cloning process is complete, enter the folder of the newly created project:
 
    ```bash
-   cd kawaltani-chatbot-be
+   cd alitnest-be
    ```
 
 6. **Install dependencies:**
@@ -63,16 +68,16 @@ Here you list all prerequisites necessary for running the project:
    Run in the project root:
 
    ```bash
-   composer install
+   npm install
    ```
 
 7. **Run the app:**
 
    ```bash
-   php artisan serve
+   npm start
    ```
 
-   The app will be available at [`http://127.0.0.1:8000`](http://127.0.0.1:8000).
+   The app will be available at [`http://127.0.0.1:80`](http://127.0.0.1:80).
 
 <h2 id="routes">📍 API Endpoints</h2>
 
@@ -80,7 +85,7 @@ Here is a list of the main API routes with the expected request bodies.
 ​
 | Route               | Description                                          
 |----------------------|-----------------------------------------------------
-| <kbd>POST /api/chat/send</kbd>     | Sending a new message and getting a reply from the AI [request details](#post-send-detail)
+| <kbd>POST /register</kbd>     | Sending a new message and getting a reply from the AI [request details](#post-send-detail)
 | <kbd>GET /api/chat/names</kbd>     | Taking all titles from the conversation history [response details](#get-all-chat-detail)
 | <kbd>GET /api/chat/history/{name_chat}</kbd>     | Taking message history details from a conversation based on its title [response details](#get-chat-detail)
 | <kbd>DELETE /api/chat/history/{name_chat}</kbd>     | Deleting a conversation history based on its title [response details](#delete-chat-detail)
