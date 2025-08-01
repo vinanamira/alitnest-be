@@ -86,122 +86,288 @@ Here is a list of the main API routes with the expected request bodies.
 ​
 | Route               | Description                                          
 |----------------------|-----------------------------------------------------
-| <kbd>POST /register</kbd>     | Sending a new message and getting a reply from the AI [request details](#post-send-detail)
-| <kbd>GET /api/chat/names</kbd>     | Taking all titles from the conversation history [response details](#get-all-chat-detail)
-| <kbd>GET /api/chat/history/{name_chat}</kbd>     | Taking message history details from a conversation based on its title [response details](#get-chat-detail)
-| <kbd>DELETE /api/chat/history/{name_chat}</kbd>     | Deleting a conversation history based on its title [response details](#delete-chat-detail)
-| <kbd>PUT /api/chat/rename-chat/{name_chat}</kbd>     | Changing the title of an existing conversation history [request details](#rename-chat-detail)
+| <kbd>POST /register</kbd>     | Sending a new message and getting a reply from the AI [request details](#post-register-detail)
+| <kbd>POST /login</kbd>     | Taking all titles from the conversation history [request details](#post-login-detail)
+| <kbd>GET /profile/:userId</kbd>     | Taking message history details from a conversation based on its title [response details](#get-profile-detail)
+| <kbd>PUT /profile/:userId</kbd>     | Deleting a conversation history based on its title [request details](#put-profile-detail)
+| <kbd>PUT /profile/password/:userId</kbd>     | Changing the title of an existing conversation history [request details](#forget-password-detail)
+| <kbd>POST /nutriwise</kbd>     | Changing the title of an existing conversation history [request details](#post-nutriwise-detail)
+| <kbd>POST /daily-goals</kbd>     | Changing the title of an existing conversation history [request details](#post-daily-goals-detail)
+| <kbd>GET /daily-goals/totals/:userId/:date</kbd>     | Changing the title of an existing conversation history [request details](#get-daily-goals-detail)
+| <kbd>POST /survey</kbd>     | Changing the title of an existing conversation history [request details](#post-survey-detail)
 
-<h3 id="post-send-detail">POST /api/chat/send</h3>
+<h2>Autentikasi</h2>
 
-**REQUEST**
-```json
-{
-  "message": "Saya mau melihat data pH  di area 2 tanggal 19 Mei",
-  "name_chat": ""
-}
-```
-
-**RESPONSE**
-```json
-{
-    "message": "Saya mau melihat data pH  di area 2 tanggal 19 Mei",
-    "response": "Ringkasan Kondisi Lahan:\n\nTanggal 19 Mei 2025:\n- Sensor pH Area 2: Terdapat lonjakan pH hingga mencapai angka 9. Kemungkinan area lahan di sekitar sensor tersebut saat ini sedang menjadi sangat basa. Disarankan untuk dilakukan pengecekan lebih lanjut terkait penyebab dan tindakan rektifkasinya.",
-    "name_chat": "Saya mau melihat data pH  di area 2 tang..."
-}
-```
-<h3 id="get-all-chat-detail">GET /api/chat/names</h3>
-
-**RESPONSE**
-```json
-[
-    {
-        "session_id": 3,
-        "name_chat": "Saya mau melihat data pH  di area 2 tang...",
-        "updated_at": "2025-07-31T07:22:41.000000Z"
-    },
-    {
-        "session_id": 2,
-        "name_chat": "TestWhitebox",
-        "updated_at": "2025-07-31T07:21:54.000000Z"
-    },
-    {
-        "session_id": 1,
-        "name_chat": "Testing",
-        "updated_at": "2025-07-29T19:47:31.000000Z"
-    }
-]
-```
-
-<h3 id="get-chat-detail">GET /api/chat/history/{name_chat}</h3>
-
-**RESPONSE**
-```json
-[
-    {
-        "message": "Saya mau melihat data pH  di area 2 tanggal 19 Mei",
-        "response": "Pada tanggal 19 Mei 2025, data sensor menunjukkan kondisi lahan sebagai berikut: PH pada area 2 mencapai angka 9. Temuan ini mengindikasikan tingkat keasaman yang relatif tinggi, yang sebaiknya dijaga agar tidak terus meningkat dan berdampak buruk pada ketersediaan hara bagi tanaman.",
-        "sent_at": "2025-07-31T07:21:54.000000Z"
-    },
-    {
-        "message": "Saya mau melihat data pH  di area 2 tanggal 19 Mei",
-        "response": "Ringkasan Kondisi Lahan:\nPada tanggal 19 Mei 2025, di area 2, nilai pH mencapai tingkat tertinggi dengan angka 9. Data ini menandakan kondisi lahan sedikit basa pada area tersebut. Informasi ini penting untuk pemantauan kesehatan dan kebutuhan perawatan tanaman, terutama tanaman tertentu yang peka terhadap keasaman tanah.",
-        "sent_at": "2025-07-31T07:22:27.000000Z"
-    }
-]
-```
-
-<h3 id="delete-chat-detail">DELETE /api/chat/history/{name_chat}</h3>
-
-**RESPONSE**
-```json
-{
-    "message": "Percakapan berhasil dihapus."
-}
-```
-
-<h3 id="#rename-chat-detail">PUT /api/chat/rename-chat/{name_chat}</h3>
+<h3 id="post-send-detail">POST /register</h3>
 
 **REQUEST**
 ```json
 {
-  "newName": "Data tanggal 19 Mei"
+    "name": "test ajaaa",
+    "email": "test4@gmail.com",
+    "password": "Test 127774"
 }
 ```
 
 **RESPONSE**
 ```json
 {
-    "message": "Nama chat berhasil diganti."
+  "status": "SUCCESS",
+  "message": "Pendaftaran Berhasil!",
+  "data": {
+    "name": "test ajaaa",
+    "email": "test4@gmail.com",
+    "password": "$2b$10$CpH7UEWyJnlzlD6Giw3RGuL6rT5ZNmwv0W2SbYGLql2pe6bX5CN3u",
+    "_id": "67dd191d911c81ac77186e10",
+    "createdAt": "2025-03-21T07:45:33.019Z",
+    "updatedAt": "2025-03-21T07:45:33.019Z",
+    "__v": 0
+  }
 }
 ```
 
+<h3 id="post-login-detail">POST /login</h3>
 
-<h2 id="colab">🤝 Collaborators</h2>
+**REQUEST**
+```json
+{
+    "email": "test4@gmail.com",
+    "password": "Test 127774"
+}
+```
 
-Special thank you for all people that contributed for this project.
+**RESPONSE**
+```json
+{
+  "status": "SUCCESS",
+  "message": "Login Berhasil",
+  "data": {
+    "_id": "67dd191d911c81ac77186e10",
+    "name": "test ajaaa",
+    "email": "test4@gmail.com",
+    "password": "$2b$10$CpH7UEWyJnlzlD6Giw3RGuL6rT5ZNmwv0W2SbYGLql2pe6bX5CN3u",
+    "createdAt": "2025-03-21T07:45:33.019Z",
+    "updatedAt": "2025-03-21T07:45:33.019Z",
+    "__v": 0
+  }
+}
+```
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/annisasha">
-        <img src="https://avatars.githubusercontent.com/u/152659249?v=4" width="100px;" alt="Fernanda Kipper Profile Picture"/><br>
-        <sub>
-          <b>Annisa Shafira</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/shalmanrafli30">
-        <img src="https://avatars.githubusercontent.com/u/151373806?v=4" width="100px;" alt="Shalman Rafli Picture"/><br>
-        <sub>
-          <b>Shalman Rafli</b>
-        </sub>
-      </a>
-    </td>
-</table>
+<h3 id="get-profile-detail">GET /profile/:userId</h3>
+
+**PATH VARIABLES**
+```
+userId : 67f7a8d2dd3a9e1643463709
+```
+
+**RESPONSE**
+```json
+{
+  "status": "SUCCESS",
+  "data": {
+    "id": "67f7a8d2dd3a9e1643463709",
+    "name": "test ajaaa",
+    "email": "test2@gmail.com",
+    "phone": "",
+    "createdAt": "2025-04-10T11:17:38.297Z"
+  }
+}
+```
+
+<h3 id="put-profile-detail">PUT /profile/:userId</h3>
+
+**PATH VARIABLES**
+```
+userId : 67f7a8d2dd3a9e1643463709
+```
+
+**REQUEST**
+```json
+{
+    "name": "Putri Sari",
+    "email": "putri.baru2@gmail.com",
+    "phone": "08123456789"
+}
+```
+
+**RESPONSE**
+```json
+{
+  "status": "SUCCESS",
+  "message": "Profil berhasil diperbarui",
+  "data": {
+    "id": "67f7a8d2dd3a9e1643463709",
+    "name": "Putri Sari",
+    "email": "putri.baru2@gmail.com",
+    "phone": "08123456789"
+  }
+}
+```
+
+<h3 id="forget-password-detail">PUT /profile/password/:userId</h3>
+
+**REQUEST**
+```json
+{
+    "currentPassword": "Test 127774",
+    "newPassword": "passwordBaru123"
+}
+```
+
+**RESPONSE**
+```json
+{
+  "status": "SUCCESS",
+  "message": "Password berhasil diperbarui"
+}
+```
+
+<h2>Nutriwise</h2>
+
+<h3 id="post-nutriwise-detail">POST /nutriwise</h3>
+
+**REQUEST**
+```
+file
+```
+
+**RESPONSE**
+```json
+{
+  "message": "Food analyzed successfully",
+  "data": {
+    "name": "Mixed Vegetable Salad with Avocado",
+    "calories": 250,
+    "fat": 18,
+    "carbs": 20,
+    "protein": 5,
+    "vitamins": {
+      "vitaminA": 35,
+      "vitaminC": 40,
+      "calcium": 5,
+      "iron": 2,
+      "potassium": 750
+    }
+  }
+}
+```
+
+<h2>Daily Goals</h2>
+
+<h3 id="post-daily-goals-detail">POST /daily-goals</h3>
+
+**REQUEST**
+```json
+{
+  "userId": "67f6d64d14a019e5a7559264",
+  "date": "2025-04-10",
+  "meal": {
+    "name": "Bebek Goreng",
+    "calories": 245,
+    "protein": 25,
+    "fat": 15,
+    "carbs": 10,
+    "time": "12:15"
+  }
+}
+```
+
+**RESPONSE**
+```json
+{
+  "message": "Makanan berhasil ditambahkan",
+  "data": {
+    "userId": "67f6d64d14a019e5a7559264",
+    "day": 10,
+    "date": "2025-04-09T17:00:00.000Z",
+    "meals": [
+      {
+        "name": "Ayam Geprek",
+        "calories": 245,
+        "protein": 20,
+        "fat": 10,
+        "carbs": 15,
+        "time": "12:15"
+      },
+      {
+        "name": "Bebek Goreng",
+        "calories": 245,
+        "protein": 25,
+        "fat": 15,
+        "carbs": 10,
+        "time": "12:15"
+      }
+    ]
+  }
+}
+```
+
+<h3 id="get-daily-goals-detail">GET /daily-goals/totals/:userId/:date</h3>
+
+**PATH VARIABLES**
+```
+userId : 67f6d64d14a019e5a7559264
+date   : 2025-04-10
+```
+
+**RESPONSE**
+```json
+{
+  "success": true,
+  "date": "2025-04-09T17:00:00.000Z",
+  "totals": {
+    "calories": 490,
+    "protein": 45,
+    "fat": 25,
+    "carbs": 25
+  }
+}
+```
+
+<h2>In-App Survey</h2>
+
+<h3 id="post-survey-detail">POST /survey</h3>
+
+**REQUEST**
+```json
+{
+  "name": "Reynaa",
+  "goal": "Menaikkan berat badan",
+  "birthDate": "2020-08-16",
+  "activityLevel": "Aktif sedang (olahraga sedang 3-5 hari/minggu)",
+  "height": 150,
+  "currentWeight": 70,
+  "gender": "Perempuan",
+  "targetWeight": 65,
+  "weightGoalSpeed": 0.5
+}
+```
+
+**RESPONSE**
+```json
+{
+  "status": "SUCCESS",
+  "message": "Survey saved successfully",
+  "data": {
+    "name": "Reynaa",
+    "goal": "Menaikkan berat badan",
+    "birthDate": "2004-08-16T00:00:00.000Z",
+    "activityLevel": "Aktif ringan (olahraga ringan 1-3 hari/minggu)",
+    "height": 150,
+    "currentWeight": 70,
+    "gender": "Perempuan",
+    "targetWeight": 65,
+    "weightGoalSpeed": 0.5,
+    "_id": "67dd947f776f7f57db04b1a3",
+    "createdAt": "2025-03-21T16:31:59.517Z",
+    "updatedAt": "2025-03-21T16:31:59.517Z",
+    "__v": 0
+  }
+}
+```
+
 
 
 <h3>Documentations that might help</h3>
 
-OpenAI PHP Client Documentation : https://github.com/openai-php/client
+OpenAI Images and Vision Documentation : https://platform.openai.com/docs/guides/images-vision?api-mode=responses&format=file
