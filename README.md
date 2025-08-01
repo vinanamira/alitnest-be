@@ -15,6 +15,7 @@
 - Express.js
 - MongoDB
 - OpenAI
+- Docker
 
 <h2 id="started">Getting started</h2>
 
