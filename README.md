@@ -93,7 +93,7 @@ Here is a list of the main API routes with the expected request bodies.
 | <kbd>PUT /profile/password/:userId</kbd>     | Changing the title of an existing conversation history [request details](#forget-password-detail)
 | <kbd>POST /nutriwise</kbd>     | Changing the title of an existing conversation history [request details](#post-nutriwise-detail)
 | <kbd>POST /daily-goals</kbd>     | Changing the title of an existing conversation history [request details](#post-daily-goals-detail)
-| <kbd>GET /daily-goals/totals/:userId/:date</kbd>     | Changing the title of an existing conversation history [request details](#get-daily-goals-detail)
+| <kbd>GET /daily-goals/totals/:userId/:date</kbd>     | Changing the title of an existing conversation history [response details](#get-daily-goals-detail)
 | <kbd>POST /survey</kbd>     | Changing the title of an existing conversation history [request details](#post-survey-detail)
 
 <h2>Autentikasi</h2>
