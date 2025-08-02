@@ -86,15 +86,15 @@ Here is a list of the main API routes with the expected request bodies.
 ​
 | Route               | Description                                          
 |----------------------|-----------------------------------------------------
-| <kbd>POST /register</kbd>     | Sending a new message and getting a reply from the AI [request details](#post-register-detail)
-| <kbd>POST /login</kbd>     | Taking all titles from the conversation history [request details](#post-login-detail)
-| <kbd>GET /profile/:userId</kbd>     | Taking message history details from a conversation based on its title [response details](#get-profile-detail)
-| <kbd>PUT /profile/:userId</kbd>     | Deleting a conversation history based on its title [request details](#put-profile-detail)
-| <kbd>PUT /profile/password/:userId</kbd>     | Changing the title of an existing conversation history [request details](#forget-password-detail)
-| <kbd>POST /nutriwise</kbd>     | Changing the title of an existing conversation history [request details](#post-nutriwise-detail)
-| <kbd>POST /daily-goals</kbd>     | Changing the title of an existing conversation history [request details](#post-daily-goals-detail)
-| <kbd>GET /daily-goals/totals/:userId/:date</kbd>     | Changing the title of an existing conversation history [response details](#get-daily-goals-detail)
-| <kbd>POST /survey</kbd>     | Changing the title of an existing conversation history [request details](#post-survey-detail)
+| <kbd>POST /register</kbd>     | Registering new users into the system [request details](#post-register-detail)
+| <kbd>POST /login</kbd>     | Perform user authentication for login  [request details](#post-login-detail)
+| <kbd>GET /profile/:userId</kbd>     | Retrieving user profile data based on userId [response details](#get-profile-detail)
+| <kbd>PUT /profile/:userId</kbd>     | Updating user profile data based on userId [request details](#put-profile-detail)
+| <kbd>PUT /profile/password/:userId</kbd>     | Updating the user password based on userId [request details](#forget-password-detail)
+| <kbd>POST /nutriwise</kbd>     | Analyzing food from the uploaded image to calculate nutrition [request details](#post-nutriwise-detail)
+| <kbd>POST /daily-goals</kbd>     | Adding the user daily food log [request details](#post-daily-goals-detail)
+| <kbd>GET /daily-goals/totals/:userId/:date</kbd>     | Taking all user food records on a specific date [response details](#get-daily-goals-detail)
+| <kbd>POST /survey</kbd>     | Storing user survey data related to health goals [request details](#post-survey-detail)
 
 <h2>Autentikasi</h2>
 
