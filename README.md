@@ -24,6 +24,7 @@
 Here you list all prerequisites necessary for running the project:
 
 - [Express.js](https://expressjs.com/en/starter/hello-world.html)
+- [OpenAI](https://platform.openai.com/docs/overview)
 
 ## How to use
 
