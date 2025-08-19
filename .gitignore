@@ -1,0 +1,25 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+
+# Docker
+docker-compose.yml
+
+# Build / logs
+dist/
+build/
+logs/
+*.log
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# GitHub Actions (sensitive workflows)
+.github/workflows/deploy.yml
