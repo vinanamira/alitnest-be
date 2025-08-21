@@ -79,7 +79,7 @@ Here you list all prerequisites necessary for running the project:
    npm start
    ```
 
-   The app will be available at [`http://127.0.0.1:80`](http://127.0.0.1:80).
+   The app will be available at [`http://127.0.0.1:<your_port>`](http://127.0.0.1).
 
 <h2 id="routes">📍 API Endpoints</h2>
 
@@ -105,8 +105,8 @@ Here is a list of the main API routes with the expected request bodies.
 ```json
 {
     "name": "test ajaaa",
-    "email": "test4@gmail.com",
-    "password": "Test 127774"
+    "email": "user@example.com",
+    "password": "<hashed_password>"
 }
 ```
 
@@ -117,7 +117,7 @@ Here is a list of the main API routes with the expected request bodies.
   "message": "Pendaftaran Berhasil!",
   "data": {
     "name": "test ajaaa",
-    "email": "test4@gmail.com",
+    "email": "user@example.com",
     "password": "$2b$10$CpH7UEWyJnlzlD6Giw3RGuL6rT5ZNmwv0W2SbYGLql2pe6bX5CN3u",
     "_id": "67dd191d911c81ac77186e10",
     "createdAt": "2025-03-21T07:45:33.019Z",
@@ -132,8 +132,8 @@ Here is a list of the main API routes with the expected request bodies.
 **REQUEST**
 ```json
 {
-    "email": "test4@gmail.com",
-    "password": "Test 127774"
+    "email": "user@example.com",
+    "password": "<hashed_password>"
 }
 ```
 
@@ -144,7 +144,7 @@ Here is a list of the main API routes with the expected request bodies.
   "message": "Login Berhasil",
   "data": {
     "_id": "67dd191d911c81ac77186e10",
-    "name": "test ajaaa",
+    "email": "user@example.com",
     "email": "test4@gmail.com",
     "password": "$2b$10$CpH7UEWyJnlzlD6Giw3RGuL6rT5ZNmwv0W2SbYGLql2pe6bX5CN3u",
     "createdAt": "2025-03-21T07:45:33.019Z",
@@ -168,7 +168,7 @@ userId : 67f7a8d2dd3a9e1643463709
   "data": {
     "id": "67f7a8d2dd3a9e1643463709",
     "name": "test ajaaa",
-    "email": "test2@gmail.com",
+    "email": "user@example.com",
     "phone": "",
     "createdAt": "2025-04-10T11:17:38.297Z"
   }
@@ -332,7 +332,7 @@ date   : 2025-04-10
 **REQUEST**
 ```json
 {
-  "name": "Reynaa",
+  "name": "User Test",
   "goal": "Menaikkan berat badan",
   "birthDate": "2020-08-16",
   "activityLevel": "Aktif sedang (olahraga sedang 3-5 hari/minggu)",
@@ -350,7 +350,7 @@ date   : 2025-04-10
   "status": "SUCCESS",
   "message": "Survey saved successfully",
   "data": {
-    "name": "Reynaa",
+    "name": "User Test",
     "goal": "Menaikkan berat badan",
     "birthDate": "2004-08-16T00:00:00.000Z",
     "activityLevel": "Aktif ringan (olahraga ringan 1-3 hari/minggu)",
