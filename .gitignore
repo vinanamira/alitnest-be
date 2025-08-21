@@ -21,5 +21,3 @@ Thumbs.db
 .vscode/
 .idea/
 
-# GitHub Actions (sensitive workflows)
-.github/workflows/deploy.yml
