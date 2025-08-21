@@ -36,6 +36,8 @@ router.post('/message', consultationController.sendMessage);
 
 // ============== Workout ===============
 router.post('/workout', workoutController.createWorkout);
+router.get('/workout/:userId/:date', workoutController.getDailyWorkouts);
+router.get('/workout/totals/:userId'), workoutController.getWorkoutTotals;
 
 // ============== Leaderboard ===============
 router.get('/leaderboard', leaderboardController.getLeaderboard);
