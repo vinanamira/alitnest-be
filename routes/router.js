@@ -12,6 +12,9 @@ import activityController from '../controllers/activityController.js';
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
+// ============== Get Data Umum ===========
+router.get('/activities', activityController.getAllActivities);
+
 // ============== Autentikasi ===========
 router.post('/register', userController.register);
 router.post('/login', userController.login);
@@ -19,7 +22,7 @@ router.get('/profile/:id', userController.getUserProfile);
 router.put('/profile/:id', userController.updateUserProfile);  
 router.put('/profile/password/:id', userController.updatePassword);  
 
-// ============== OpenAI ================
+// ============== Nutriwise ================
 router.post('/nutriwise', upload.single('file'), nutriwise.analyzeFood);
 
 // ============== Daily Goals ===============
@@ -36,7 +39,6 @@ router.post('/start', consultationController.startConsultation);
 router.post('/message', consultationController.sendMessage);
 
 // ============== Exercise ===============
-router.get('/activities', activityController.getAllActivities);
 router.get('/activities/:type', activityController.getActivitiesByType);
 router.post('/exercises', exerciseController.createExercise);
 router.get('/exercises/daily/:userId/:date', exerciseController.getDailyExercises);
