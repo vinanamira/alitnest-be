@@ -21,8 +21,8 @@ export const createSurvey = async (req, res) => {
 
 export const getSurveyById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const survey = await Survey.findById(id);
+        const { userId } = req.params;
+        const survey = await Survey.findById(userId);
         if (!survey) {
             return res.status(404).json({
                 status: "FAILED",
