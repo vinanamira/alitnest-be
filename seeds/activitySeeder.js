@@ -3,7 +3,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import csv from 'csv-parser';
 import mongoose from 'mongoose';
-import ActivityReference from '../models/activityExercise.js';
+import ActivityExercise from '../models/activityExercise.js';
 
 dotenv.config();
 mongoose.set("strictQuery", false);
@@ -19,8 +19,8 @@ const seedDatabase = async () => {
         });
         console.log('MongoDB terhubung...');
 
-        await ActivityReference.deleteMany({});
-        console.log('Collection ActivityReference berhasil dikosongkan.');
+        await ActivityExercise.deleteMany({});
+        console.log('Collection ActivityExercise berhasil dikosongkan.');
 
         const results = [];
         const filePath = path.resolve('./tabel-mets.csv');
@@ -39,7 +39,7 @@ const seedDatabase = async () => {
             })
             .on('end', async () => {
                 if (results.length > 0) {
-                    await ActivityReference.insertMany(results);
+                    await ActivityExercise.insertMany(results);
                     console.log(`${results.length} data berhasil dimasukkan ke database.`);
                 } else {
                     console.log('Tidak ada data untuk di-seed.');

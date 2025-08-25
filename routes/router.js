@@ -36,9 +36,9 @@ router.post('/start', consultationController.startConsultation);
 router.post('/message', consultationController.sendMessage);
 
 // ============== Exercise ===============
+router.get('/activities', activityController.getAllActivities);
 router.get('/activities/:type', activityController.getActivitiesByType);
 router.post('/exercises', exerciseController.createExercise);
-router.get('/exercises/activities', activityController.getAllActivities);
 router.get('/exercises/daily/:userId/:date', exerciseController.getDailyExercises);
 router.get('/exercises/totals/:userId/:date', exerciseController.getDailyTotals);
 

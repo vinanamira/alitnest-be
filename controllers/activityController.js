@@ -1,9 +1,9 @@
-import ActivityReference from '../models/activityExercise.js';
+import ActivityExercise from '../models/activityExercise.js';
 
 // Fungsi untuk mengambil semua daftar aktivitas/olahraga
 export const getAllActivities = async (req, res) => {
     try {
-        const activities = await ActivityReference.find({});
+        const activities = await ActivityExercise.find({});
         res.status(200).json({ success: true, data: activities });
     } catch (error) {
         res.status(500).json({
@@ -22,7 +22,7 @@ export const getActivitiesByType = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Tipe aktivitas tidak valid' });
         }
 
-        const activities = await ActivityReference.find({ activityType: type });
+        const activities = await ActivityExercise.find({ activityType: type });
         res.status(200).json({ success: true, data: activities });
     } catch (error) {
         res.status(500).json({
