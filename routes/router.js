@@ -29,7 +29,7 @@ router.get('/daily-goals/meals/:userId/:date', dailyGoalsController.getDailyMeal
 
 // ============== In App Survey ===============
 router.post('/survey', survey.createSurvey);
-router.get('/survey/:id', survey.getSurveyById);
+router.get('/survey/:userId', survey.getSurveyById);
 
 // ============== Consultation ===============
 router.post('/start', consultationController.startConsultation);
