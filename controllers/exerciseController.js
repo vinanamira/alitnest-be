@@ -18,25 +18,18 @@ export const createExercise = async (req, res) => {
         let calories = 0;
 
         if (exerciseType === 'Cardio') {
-            // Untuk Cardio, kalori dihitung otomatis pakai rumus METs
-            // `userWeight` harus didapat dari request body atau dari database User
-            // `metsValue` spesifik untuk setiap exercise, dikirim dari frontend
             if (!metsValue || !userWeight) {
                 return res.status(400).json({ message: "Untuk Cardio, metsValue dan userWeight wajib diisi." });
             }
             calories = calculateCalories(duration, metsValue, userWeight);
 
         } else if (exerciseType === 'Workout') {
-            // Untuk Workout, kalori sudah ditentukan dari awal, jadi langsung diambil dari request
             if (!req.body.caloriesBurned) {
                 return res.status(400).json({ message: "Untuk Workout, caloriesBurned wajib diisi." });
             }
             calories = req.body.caloriesBurned;
 
         } else if (exerciseType === 'Strength') {
-            // Perhitungan kalori untuk Strength bisa menggunakan METs juga.
-            // Nilai METs untuk strength training umumnya 3.5 - 6.0
-            // Di sini kita asumsikan `metsValue` juga dikirim dari frontend.
             if (!metsValue || !userWeight) {
                 return res.status(400).json({ message: "Untuk Strength, metsValue dan userWeight wajib diisi." });
             }
@@ -84,13 +77,11 @@ export const getDailyExercises = async (req, res) => {
         const startDate = new Date(parsedDate.setHours(0, 0, 0, 0));
         const endDate = new Date(parsedDate.setHours(23, 59, 59, 999));
 
-        // Mengambil semua exercise pada hari itu
         const exercises = await Exercise.find({
             userId,
             createdAt: { $gte: startDate, $lte: endDate }
         });
 
-        // Mengelompokkan hasil sesuai dengan tampilan di dokumen
         const groupedExercises = {
             Cardiovascular: [],
             Strength: [],
