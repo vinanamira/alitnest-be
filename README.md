@@ -26,7 +26,7 @@ Here you list all prerequisites necessary for running the project:
 - [Express.js](https://expressjs.com/en/starter/hello-world.html)
 - [OpenAI](https://platform.openai.com/docs/overview)
 
-## How to use
+<!-- ## How to use
 
 1. **Set up the OpenAI API:**
 
@@ -365,7 +365,7 @@ date   : 2025-04-10
     "__v": 0
   }
 }
-```
+``` -->
 
 
 

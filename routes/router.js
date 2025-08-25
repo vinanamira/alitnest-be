@@ -4,9 +4,10 @@ import userController from '../controllers/userController.js';
 import nutriwise from '../controllers/nutriwiseController.js';
 import survey from '../controllers/surveyController.js';
 import consultationController from '../controllers/consultationController.js';
-import workoutController from '../controllers/workoutController.js';
 import leaderboardController from '../controllers/leaderboardController.js';
 import dailyGoalsController from '../controllers/dailyGoalsController.js';
+import exerciseController from '../controllers/exerciseController.js';
+import activityController from '../controllers/activityController.js';
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -34,10 +35,12 @@ router.get('/:id', survey.getSurveyById);
 router.post('/start', consultationController.startConsultation);
 router.post('/message', consultationController.sendMessage);
 
-// ============== Workout ===============
-router.post('/workout', workoutController.createWorkout);
-router.get('/workout/:userId/:date', workoutController.getDailyWorkouts);
-router.get('/workout/totals/:userId'), workoutController.getWorkoutTotals;
+// ============== Exercise ===============
+router.get('/activities', activityController.getAllActivities);
+router.get('/activities/:type', activityController.getActivitiesByType);
+router.post('/exercises', exerciseController.createExercise);
+router.get('/exercises/daily/:userId/:date', exerciseController.getDailyExercises);
+router.get('/exercises/totals/:userId/:date', exerciseController.getDailyTotals);
 
 // ============== Leaderboard ===============
 router.get('/leaderboard', leaderboardController.getLeaderboard);
